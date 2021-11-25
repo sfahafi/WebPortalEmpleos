@@ -10,6 +10,7 @@ public class Vacante {
 	private Date fecha;
 	private Double salario;
 	private Integer destacado;
+	private String imagen = "no-image.png";
 	
 	
 	public Integer getId() {
@@ -49,13 +50,22 @@ public class Vacante {
 	public void setDestacado(Integer destacado) {
 		this.destacado = destacado;
 	}
+		
+	public String getImagen() {
+		return imagen;
+	}
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
 	
 	
 	@Override
 	public String toString() {
 		return "Vacante [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", fecha=" + fecha
-				+ ", salario=" + salario + ", destacado=" + destacado + "]";
+				+ ", salario=" + salario + ", destacado=" + destacado + ", imagen=" + imagen + "]";
 	}
+	
+	
 	
 	
 	
