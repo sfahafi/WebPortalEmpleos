@@ -31,8 +31,8 @@ public class VacantesController {
 		
 		Vacante vacante = serviceVacantes.buscarPorId(idVacante);
 		
-		System.out.println("Vacante" + vacante);
-		model.addAttribute("Vacante", vacante);
+		System.out.println("vacante" + vacante);
+		model.addAttribute("vacante", vacante);
 		return "detalle";
 	}
 	
