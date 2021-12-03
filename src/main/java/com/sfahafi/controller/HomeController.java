@@ -1,38 +1,42 @@
 package com.sfahafi.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.sfahafi.model.Vacante;
+import com.sfahafi.service.I_VacantesService;
 
 @Controller
 public class HomeController {
 	
+	@Autowired
+	private I_VacantesService serviceVacantes;
+	
+	
 	@GetMapping("/tabla")
 	public String mostrarTabla(Model model) {
-		List<Vacante> lista = getVacantes();
+		List<Vacante> lista = serviceVacantes.buscarTodas(); // getVacantes usado anteriormente
 		model.addAttribute("vacantes", lista);
 		
 		return "tabla";
 	}
 	
-	@GetMapping("/detalle")
-	public String mostrarDetalle(Model model) {
-		Vacante vacante = new Vacante();
-		vacante.setNombre("Ingeniero de comunicaciones");
-		vacante.setDescripcion("Se solicita ingeniero para dar soporte a intranet");
-		vacante.setFecha(new Date());
-		vacante.setSalario(9700.0);
-		model.addAttribute("vacante", vacante);
-		return "detalle";
-	}
+//	@GetMapping("/detalle")
+//	public String mostrarDetalle(Model model) {
+//		Vacante vacante = new Vacante();
+//		vacante.setNombre("Ingeniero de comunicaciones");
+//		vacante.setDescripcion("Se solicita ingeniero para dar soporte a intranet");
+//		vacante.setFecha(new Date());
+//		vacante.setSalario(9700.0);
+//		model.addAttribute("vacante", vacante);
+//		return "detalle";
+//	}
 	
 	@GetMapping("/listado")
 	public String mostrarListado(Model model) {
@@ -68,11 +72,16 @@ public class HomeController {
 		return "home";
 	}
 	
+	
+	//***********************************************************************************************
+	
 	/**
 	 * Metodo que regresa una lista de objetos de tipo Vacante
 	 * @return
 	 */
 	
+	
+	/*
 	private List<Vacante> getVacantes(){
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -118,9 +127,9 @@ public class HomeController {
 			vacante4.setDestacado(1);
 			vacante4.setImagen("empresa4.png");
 			
-			/**
-			 * Se agregan los cuatro objetos de tipo Vacante a la lista
-			 */
+			
+			Se agregan los cuatro objetos de tipo Vacante a la lista
+			 
 			
 			lista.add(vacante1);
 			lista.add(vacante2);
@@ -132,7 +141,9 @@ public class HomeController {
 		}
 		
 		return lista;
-	}
+	}*/
+	
+	
 	
 	
 }
