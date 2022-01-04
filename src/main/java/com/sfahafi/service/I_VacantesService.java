@@ -6,8 +6,8 @@ import com.sfahafi.model.Vacante;
 
 public interface I_VacantesService {
 	
-	List<Vacante> buscarTodas();
-	
+	List<Vacante> buscarTodas();	
 	Vacante buscarPorId(Integer idVacante);
+	void guardar(Vacante vacante);
 	
 }

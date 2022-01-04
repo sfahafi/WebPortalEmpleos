@@ -1,9 +1,15 @@
 package com.sfahafi.controller;
 
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +30,22 @@ public class VacantesController {
 		return "vacantes/formVacante";
 	}
 	
+	// Metodo save utilizando Data Binding
+	@PostMapping("/save")
+	public String guardar(Vacante vacante) {
+		serviceVacantes.guardar(vacante);	
+		System.out.println("Vacante: " + vacante);
+		
+		return "vacantes/listVacantes";
+	}
+	
+	@InitBinder
+	public void initBinder(WebDataBinder webDataBinder) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+	}
+	
+	/*
 	@PostMapping("/save")
 	public String guardar(@RequestParam("nombre") String nombre, @RequestParam("descripcion") String descripcion,
 			@RequestParam("estatus") String estatus, @RequestParam("fecha") String fecha,
@@ -39,7 +61,7 @@ public class VacantesController {
 		System.out.println("Detalles: " + detalles);
 		
 		return "vacantes/listVacantes";
-	}
+	}*/
 	
 	@GetMapping("/delete")
 	public String eliminar(@RequestParam("id") int idVacante, Model model) {
