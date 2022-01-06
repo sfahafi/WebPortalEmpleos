@@ -52,7 +52,7 @@ public class VacantesController {
 		serviceVacantes.guardar(vacante);	
 		System.out.println("Vacante: " + vacante);
 		
-		return "redirect:vacantes/index";
+		return "redirect:/vacantes/index";
 	}
 	
 	@InitBinder

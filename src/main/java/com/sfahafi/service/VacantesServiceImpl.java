@@ -36,6 +36,7 @@ public class VacantesServiceImpl implements I_VacantesService {
 			vacante2.setFecha(sdf.parse("09-02-2021"));
 			vacante2.setSalario(120000.0);
 			vacante2.setDestacado(0);
+			vacante2.setEstatus("Aprobada");
 			vacante2.setImagen("empresa2.png");
 			
 			// Se crea la tercera vacante
@@ -46,6 +47,7 @@ public class VacantesServiceImpl implements I_VacantesService {
 			vacante3.setFecha(sdf.parse("06-04-2021"));
 			vacante3.setSalario(8000.0);
 			vacante3.setDestacado(0);
+			vacante3.setEstatus("Aprobada");
 			
 			// Se crea la cuarta vacante
 			Vacante vacante4 = new Vacante();
@@ -55,6 +57,7 @@ public class VacantesServiceImpl implements I_VacantesService {
 			vacante4.setFecha(sdf.parse("05-05-2021"));
 			vacante4.setSalario(10304.0);
 			vacante4.setDestacado(1);
+			vacante4.setEstatus("Aprobada");
 			vacante4.setImagen("empresa4.png");
 			
 			/**
