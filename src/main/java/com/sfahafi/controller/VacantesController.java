@@ -1,7 +1,7 @@
 package com.sfahafi.controller;
 
 import java.util.Date;
-import java.util.Iterator;
+import java.util.List;
 import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +28,15 @@ public class VacantesController {
 	@Autowired
 	private I_VacantesService serviceVacantes;
 	
+	@GetMapping("/index")
+	public String mostrarIndex(Model model) {
+		List<Vacante> lista = serviceVacantes.buscarTodas();
+		model.addAttribute("vacantes", lista);
+		return "vacantes/listVacantes";
+	}
+	
 	@GetMapping("/create")
-	public String crear() {
+	public String crear(Vacante vacante) {
 		return "vacantes/formVacante";
 	}
 	
@@ -45,7 +52,7 @@ public class VacantesController {
 		serviceVacantes.guardar(vacante);	
 		System.out.println("Vacante: " + vacante);
 		
-		return "vacantes/listVacantes";
+		return "redirect:vacantes/index";
 	}
 	
 	@InitBinder
