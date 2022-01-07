@@ -30,6 +30,10 @@
           <div class="card-body">
             <a class="btn btn-primary" th:href="@{/vacantes/create}" title="Crear nueva Oferta de Trabajo" role="button"><i class="fas fa-file" aria-hidden="true"></i> Nueva</a>            
             <hr>
+            
+            <!-- <h5 th:text="${msg}"></h5> -->
+            <div th:if="${msg != null}" class="alert alert-success" th:text="${msg}" role="alert"></div>
+            
             <table class="table table-hover">
               <thead class="thead-light">
                 <tr>
