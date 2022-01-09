@@ -1,33 +1,59 @@
 package com.sfahafi.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.sfahafi.model.Categoria;
+import com.sfahafi.service.ICategoriasService;
 
 @Controller
 @RequestMapping(value="categorias")
 public class CategoriasController {
 
+	private ICategoriasService serviceCategorias;
+	
 	// @GetMapping("/index")
 	@RequestMapping(value="/index", method=RequestMethod.GET)
 	public String mostrarIndex(Model model) {
+		List<Categoria> lista = serviceCategorias.buscarTodas();
+    	model.addAttribute("categorias", lista);
+
 		return "categorias/listCategorias";
 	}
 	
 	// @GetMapping("/create")
 	@RequestMapping(value="/create", method=RequestMethod.GET)
-	public String crear() {
+	public String crear(Categoria categoria) {
 		return "categorias/formCategorias";
 	}
 	
+	@RequestMapping(value="/save", method=RequestMethod.POST)
+	public String guardar(Categoria categoria, BindingResult result, RedirectAttributes attributes) {
+		if (result.hasErrors()){		
+			System.out.println("Existieron errores");
+			return "categorias/formCategoria";
+		}	
+		
+		// Guadamos el objeto categoria en la bd
+		serviceCategorias.guardar(categoria);
+		attributes.addFlashAttribute("msg", "Los datos de la categorÃ­a fueron guardados!");		
+		return "redirect:/categorias/index";
+	}
+	
+
+	/*
 	// @PostMapping("/save")
 	@RequestMapping(value="/save", method=RequestMethod.POST)
 	public String guardar(@RequestParam("nombre") String nombre, @RequestParam("descripcion") String descripcion) {
 		System.out.println("Categoria: " + nombre);
 		System.out.println("Descripcion: " + descripcion);
 		return "categorias/listCategorias";
-	}
+	} */
 	
 }
