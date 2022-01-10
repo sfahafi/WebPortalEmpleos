@@ -1,6 +1,5 @@
 package com.sfahafi.service;
 
-import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.sfahafi.model.Categoria;
 
 @Service
-public class CategoriasServiceImpl implements ICategoriasService {
+public class CategoriasServiceImpl implements I_CategoriasService {
 
 	
 	private List<Categoria> lista = null;
@@ -61,17 +60,18 @@ public class CategoriasServiceImpl implements ICategoriasService {
 
 	} 
 	
-	@Override
-	public void guardar(Categoria categoria) {
-		lista.add(categoria);
-
-		
-	}
-
+	
 	@Override
 	public List<Categoria> buscarTodas() {
 		return lista;
 	}
+	
+	@Override
+	public void guardar(Categoria categoria) {
+		lista.add(categoria);
+		
+	}
+
 
 	@Override
 	public Categoria buscarPorId(Integer idCategoria) {

@@ -57,12 +57,15 @@
                 <div class="col-md-3"> 
                   <div class="form-group">
                     <label for="categoria">Categoría</label>
-                    <select class="form-control" name="categoria" id="categoria">
-                      <option value="1">Ventas</option>
+                    <select class="form-control" th:field="*{categoria.id}">
+                      <!-- Se generan los option dinamicamente con thymeleaf -->
+                      <option th:each="categoria : ${categorias}" th:value="${categoria.id}" th:text="${categoria.nombre}"> </option>
+                      <!--  
                       <option value="2">Contabilidad</option>
                       <option value="3">Transporte</option>
                       <option value="4">Informatica</option>
                       <option value="5">Construccion</option>
+                      -->
                     </select>
                   </div>
                 </div>
