@@ -29,7 +29,7 @@
         <div class="card">
           <h4 class="card-header"><strong>Datos de la oferta de trabajo</strong></h4>              
           <div class="card-body">
-            <form th:action="@{/vacantes/save}" method="post" th:object="${vacante}"> <!-- th:object="${vacante}" se agrega para poder manejar los errores -->
+            <form th:action="@{/vacantes/save}" method="post" th:object="${vacante}" enctype="multipart/form-data"> <!-- th:object="${vacante}" se agrega para poder manejar los errores -->
               
               <!-- En este div se capturan los errores y se muestran al usuario en la interfaz -->
               <div th:if="${#fields.hasErrors('*')}" class='alert alert-danger' role="alert">
