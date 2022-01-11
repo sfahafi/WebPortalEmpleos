@@ -5,6 +5,7 @@ import java.util.List;
 import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +30,9 @@ import com.sfahafi.util.Utileria;
 @RequestMapping("/vacantes")
 public class VacantesController {
 
+	@Value("${rutasaveimg}")
+	private String ruta;
+	
 	@Autowired
 	private I_VacantesService serviceVacantes;
 
@@ -63,8 +67,8 @@ public class VacantesController {
 
 		if (!multiPart.isEmpty()) {
 			// String ruta = "/empleos/img-vacantes/"; // Linux/MAC
-			String ruta = "c:/empleos/img-vacantes/"; // Windows
-			String nombreImagen = Utileria.guardarArchivo(multiPart, ruta);
+			//String ruta = "c:/empleos/img-vacantes/"; // Windows
+			String nombreImagen = Utileria.guardarArchivo(multiPart, ruta); // la ruta se guardo en app.properties y se inyecto con la anotacio @Value
 			if (nombreImagen != null) { // La imagen si se subio
 				// Procesamos la variable nombreImagen
 				vacante.setImagen(nombreImagen);
