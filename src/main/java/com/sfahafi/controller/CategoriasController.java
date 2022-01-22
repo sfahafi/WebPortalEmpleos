@@ -18,6 +18,7 @@ import com.sfahafi.service.I_CategoriasService;
 public class CategoriasController {
 
 	@Autowired
+	//@Qualifier("categoriasServiceJpa)" -- Para definir cual de las interfaces se va a implementar en caso de no usar @Primary en la interfaz
 	private I_CategoriasService serviceCategorias;
 	
 	// @GetMapping("/index")

@@ -1,0 +1,70 @@
+Hola Castillo. Para almacenar las imágenes (incluso cualquier archivo binario) directamente en la tabla en base de datos deberías hacer de forma general el siguiente procedimiento:
+
+1. Declarar en tu clase de modelo un atributo de tipo de dato byte[] y marcarlo con la anotación @Lob. Ejemplo:
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.Table;
+ 
+@Entity
+@Table(name="Imagenes")
+public class ImageModel {
+	@Id
+	@Column(name = "id")
+	private Long id;
+ 
+	@Column(name = "name")
+	private String name;
+ 
+	@Column(name = "type")
+	private String type;
+ 
+	@Lob
+	@Column(name="pic")
+	private byte[] pic;
+ 
+	public ImageModel(){}
+ 
+	public ImageModel(long id, String name, String type, byte[] pic){
+		this.id = id;
+		this.name = name;
+		this.type = type;
+		this.pic = pic;
+	}
+	
+	// getter/setters
+}
+2. En tu tabla el tipo de dato donde almacenaras la imagen (incluso cualquier archivo binario) debera ser de tipo BLOB. Ejemplo:
+
+-- MySQL script
+CREATE TABLE Imagenes(
+   id BIGINT NOT NULL,
+   name VARCHAR(100) NOT NULL,
+   type VARCHAR(10) NOT NULL,
+   pic BLOB NOT NULL,
+   PRIMARY KEY (id)
+);
+3. Declarar tu repositorio de forma común. Ejemplo:
+
+public interface ImageRepository extends JpaRepository<ImageModel, Long>{
+ 
+}
+4. Para guardar un registro con una imagen, este seria un ejemplo, suponiendo que estas en un controlador:
+
+// Inyectar tu repositorio.
+@Autowired
+ImageRepository imageRepository;
+ 
+// Crear tu objeto que vas a guardar:
+ClassPathResource backImgFile = new ClassPathResource("/home/itinajero/Downloads/jsa_about_img_black_background.png");
+byte[] arrayPic = new byte[(int) backImgFile.contentLength()];
+backImgFile.getInputStream().read(arrayPic);
+ImageModel blackImage = new ImageModel(1, "JSA-ABOUT-IMAGE-BLACK-BACKGROUND", "png", arrayPic);
+ 
+// Guardar objeto a MySQL via SpringJPA
+imageRepository.save(blackImage);
+En internet hay muchos ejemplos, solo has una búsqueda por ejemplo 'spring boot @Lob example mysql' para investigar mas por tu cuenta. Espero que esta información te ayude.
+
+Saludos.
