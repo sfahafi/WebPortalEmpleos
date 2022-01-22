@@ -2,8 +2,14 @@ package com.sfahafi.model;
 
 import java.util.Date;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="vacantes")
 public class Vacante {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nombre;
 	private String descripcion;
@@ -13,6 +19,9 @@ public class Vacante {
 	private String imagen = "no-image.png";
 	private String estatus;
 	private String detalles;
+	//@Transient  // Para ignorar el mapeo de este atributo
+	@OneToOne
+	@JoinColumn(name="idCategoria")
 	private Categoria categoria;
 	
 	
