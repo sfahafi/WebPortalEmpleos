@@ -102,5 +102,11 @@ public class VacantesServiceImpl implements I_VacantesService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void eliminar(Integer idVacante) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
