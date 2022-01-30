@@ -13,16 +13,6 @@ public class Categoria {
 	private String descripcion;
 	
 	
-	
-	public Categoria() {
-	}
-	
-	public Categoria(Integer id, String nombre, String descripcion) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.descripcion = descripcion;
-	}
 	public Integer getId() {
 		return id;
 	}

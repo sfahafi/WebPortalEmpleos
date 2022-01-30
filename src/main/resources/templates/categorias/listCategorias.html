@@ -25,7 +25,7 @@
       <div class="container"> 
 
         <div class="card">
-          <h4 class="card-header"><strong>Listado de CategorÃ­as</strong></h4>              
+          <h4 class="card-header"><strong>Listado de Categor&iacute;as</strong></h4>              
           <div class="card-body">
             <a class="btn btn-primary" th:href="@{/categorias/create}" role="button"><i class="fas fa-file" aria-hidden="true"></i> Nueva</a>            
             <hr>
@@ -35,7 +35,7 @@
                 <tr>
                   <th scope="col">Id</th>
                   <th scope="col">Nombre</th>
-                  <th scope="col">DescripciÃ³n</th>
+                  <th scope="col">Descripci&oacute;n</th>
                   <th scope="col">Operaciones</th>
                 </tr>
               </thead>
@@ -45,8 +45,8 @@
                   <td th:text="${cat.nombre}"></td>
                   <td th:text="${cat.descripcion}"></td>
                   <td>
-                    <a href="#" class="btn btn-success btn-sm" role="button" title="Editar"><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
-                    <a href="#" onclick="return confirm('Â¿Estas seguro?')" class="btn btn-success btn-sm" role="button" title="Eliminar"><i class="fas fa-trash" aria-hidden="true"></i></a>
+                    <a th:href="@{/categorias/edit/{id} (id=${cat.id})}" class="btn btn-success btn-sm" role="button" title="Editar"><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
+                    <a th:href="@{/categorias/delete/{id} (id=${cat.id})}" onclick="return confirm('Se va a eliminar la categoria, deseas continuar?')" class="btn btn-success btn-sm" role="button" title="Eliminar"><i class="fas fa-trash" aria-hidden="true"></i></a>
                   </td>
                 </tr>                              
               </tbody>

@@ -8,7 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.sfahafi.model.Usuario;
 import com.sfahafi.model.Vacante;
 import com.sfahafi.service.I_VacantesService;
 
@@ -57,6 +60,16 @@ public class HomeController {
 		// List<Vacante> lista = serviceVacantes.buscarTodas(); fue reemplazado por el modelo agregado en setGenericos
 		// model.addAttribute("vacantes", lista);
 		return "home";
+	}
+	
+	@GetMapping("/signup")
+	public String registrarse(Usuario usuario) {
+		return "formRegistro";
+	}
+	
+	@PostMapping("/sign")
+	public String guardarRegistro(Usuario usuario, RedirectAttributes attributes) {
+		return "redirect:/usuarios/index";
 	}
 	
 	@ModelAttribute
