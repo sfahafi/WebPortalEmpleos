@@ -1,5 +1,6 @@
 package com.sfahafi.controller;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,8 +12,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.sfahafi.model.Perfil;
 import com.sfahafi.model.Usuario;
 import com.sfahafi.model.Vacante;
+import com.sfahafi.service.I_UsuariosService;
 import com.sfahafi.service.I_VacantesService;
 
 @Controller
@@ -20,6 +23,8 @@ public class HomeController {
 	
 	@Autowired
 	private I_VacantesService serviceVacantes;
+	
+	private I_UsuariosService ius;
 	
 	
 	@GetMapping("/tabla")
@@ -67,8 +72,23 @@ public class HomeController {
 		return "formRegistro";
 	}
 	
-	@PostMapping("/sign")
+	@PostMapping("/signup")
 	public String guardarRegistro(Usuario usuario, RedirectAttributes attributes) {
+		usuario.setEstatus(1); // Activado por defecto
+		usuario.setFechaRegistro(new Date()); // Fecha de Registro, la fecha actual del servidor
+		
+		// Creamos el Perfil que le asignaremos al usuario nuevo
+		Perfil perfil = new Perfil();
+		perfil.setId(3); // Perfil USUARIO
+		usuario.agregar(perfil);
+		
+		/**
+		 * Guardamos el usuario en la base de datos. El Perfil se guarda automaticamente
+		 */
+		ius.guardar(usuario);
+				
+		attributes.addFlashAttribute("msg", "El registro fue guardado correctamente!");
+		
 		return "redirect:/usuarios/index";
 	}
 	
