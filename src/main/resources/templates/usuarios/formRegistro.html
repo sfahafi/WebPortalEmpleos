@@ -28,30 +28,31 @@
         <div class="card">
           <h4 class="card-header"><strong>Formulario de registro</strong></h4>              
           <div class="card-body">
-            <form>              
+            <form th:action="@{/signin}" method="post" th:object="${usuario}">              
               <div class="row">
                 <div class="col-md-3"> 
                   <div class="form-group">
                     <label for="nombre">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Escriba su nombre" required="required">
+                    <input type="hidden" th:field="*{id}">
+                    <input type="text" class="form-control" th:field="*{nombre}" id="nombre" name="nombre" placeholder="Escriba su nombre" required="required">
                   </div>
                 </div>
                 <div class="col-md-3"> 
                   <div class="form-group">
                     <label for="email">Correo electr&oacute;nico</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Escriba su correo electr&oacute;nico" required="required">
+                    <input type="email" class="form-control" th:field="*{email}" id="email" name="email" placeholder="Escriba su correo electr&oacute;nico" required="required">
                   </div> 
                 </div>    
                 <div class="col-md-3"> 
                   <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Escriba su nombre de usuario" required="required">
+                    <input type="text" class="form-control" th:field="*{username}" id="username" name="username" placeholder="Escriba su nombre de usuario" required="required">
                   </div>
                 </div>
                 <div class="col-md-3"> 
                   <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Escriba su clave de acceso" required="required">
+                    <input type="password" class="form-control" th:field="*{password}" id="password" name="password" placeholder="Escriba su clave de acceso" required="required">
                   </div>
                 </div>
               </div>                  

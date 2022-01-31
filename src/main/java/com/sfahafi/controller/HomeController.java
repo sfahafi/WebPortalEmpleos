@@ -24,6 +24,7 @@ public class HomeController {
 	@Autowired
 	private I_VacantesService serviceVacantes;
 	
+	@Autowired
 	private I_UsuariosService ius;
 	
 	
@@ -72,7 +73,7 @@ public class HomeController {
 		return "formRegistro";
 	}
 	
-	@PostMapping("/signup")
+	@PostMapping("/signin")
 	public String guardarRegistro(Usuario usuario, RedirectAttributes attributes) {
 		usuario.setEstatus(1); // Activado por defecto
 		usuario.setFechaRegistro(new Date()); // Fecha de Registro, la fecha actual del servidor

@@ -29,8 +29,9 @@ public class UsuariosController {
 	
 	@GetMapping("/delete/{id}")
 	public String eliminar(@PathVariable("id") int idUsuario, RedirectAttributes attributes) {
-		
-		
+		// Eliminamos el usuario
+    	ius.eliminar(idUsuario);			
+		attributes.addFlashAttribute("msg", "El usuario fue eliminado!.");
 		return "redirect:/usuarios/index";
 	}
 	
