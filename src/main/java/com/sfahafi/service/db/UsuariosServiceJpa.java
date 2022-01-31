@@ -1,6 +1,7 @@
 package com.sfahafi.service.db;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,15 @@ public class UsuariosServiceJpa implements I_UsuariosService {
 	@Override
 	public List<Usuario> buscarTodos() {
 		return ur.findAll();
+	}
+
+	@Override
+	public Usuario buscarPorId(Integer idUsuario) {
+		Optional<Usuario> optional = ur.findById(idUsuario);
+		if(optional.isPresent()) {
+			return optional.get();
+		}
+		return null;
 	}
 
 }

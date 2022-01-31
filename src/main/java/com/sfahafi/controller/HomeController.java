@@ -7,8 +7,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -73,8 +75,19 @@ public class HomeController {
 		return "formRegistro";
 	}
 	
+	@GetMapping("/edituser/{id}")
+	public String editarUsuario(@PathVariable("id") int idUsuario, Model model) {
+		Usuario usuario = ius.buscarPorId(idUsuario);
+		model.addAttribute("usuario", usuario);
+		return "formRegistro";
+	}
+	
 	@PostMapping("/signin")
-	public String guardarRegistro(Usuario usuario, RedirectAttributes attributes) {
+	public String guardarRegistro(Usuario usuario, BindingResult result, RedirectAttributes attributes) {
+		if (result.hasErrors()){		
+			System.out.println("Existieron errores");
+			return "categorias/formCategoria";
+		}	
 		usuario.setEstatus(1); // Activado por defecto
 		usuario.setFechaRegistro(new Date()); // Fecha de Registro, la fecha actual del servidor
 		
@@ -90,7 +103,7 @@ public class HomeController {
 				
 		attributes.addFlashAttribute("msg", "El registro fue guardado correctamente!");
 		
-		return "redirect:/usuarios/index";
+		return "usuarios/index";
 	}
 	
 	@ModelAttribute
