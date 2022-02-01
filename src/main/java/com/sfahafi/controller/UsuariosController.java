@@ -35,4 +35,11 @@ public class UsuariosController {
 		return "redirect:/usuarios/index";
 	}
 	
+	@GetMapping("/edituser/{id}")
+	public String editarUsuario(@PathVariable("id") int idUsuario, Model model) {
+		Usuario usuario = ius.buscarPorId(idUsuario);
+		model.addAttribute("usuarios", usuario);
+		return "redirect:/signup";
+	}
+	
 }

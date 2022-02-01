@@ -75,12 +75,7 @@ public class HomeController {
 		return "formRegistro";
 	}
 	
-	@GetMapping("/edituser/{id}")
-	public String editarUsuario(@PathVariable("id") int idUsuario, Model model) {
-		Usuario usuario = ius.buscarPorId(idUsuario);
-		model.addAttribute("usuario", usuario);
-		return "formRegistro";
-	}
+	
 	
 	@PostMapping("/signin")
 	public String guardarRegistro(Usuario usuario, BindingResult result, RedirectAttributes attributes) {
@@ -103,7 +98,7 @@ public class HomeController {
 				
 		attributes.addFlashAttribute("msg", "El registro fue guardado correctamente!");
 		
-		return "usuarios/index";
+		return "redirect:/usuarios/index";
 	}
 	
 	@ModelAttribute
