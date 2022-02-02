@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.sfahafi.model.Perfil;
 import com.sfahafi.model.Usuario;
 import com.sfahafi.model.Vacante;
+import com.sfahafi.service.I_CategoriasService;
 import com.sfahafi.service.I_UsuariosService;
 import com.sfahafi.service.I_VacantesService;
 
@@ -28,6 +29,9 @@ public class HomeController {
 	
 	@Autowired
 	private I_UsuariosService ius;
+	
+	@Autowired
+	private I_CategoriasService ics;
 	
 	
 	@GetMapping("/tabla")
@@ -101,9 +105,19 @@ public class HomeController {
 		return "redirect:/usuarios/index";
 	}
 	
+	@GetMapping("/search")
+	public String buscar(@ModelAttribute("search") Vacante vacante) {
+		System.out.println("Buscando por: " + vacante);
+		return "home";
+	}
+	
+	
 	@ModelAttribute
 	public void setGenericos(Model model) {
+		Vacante vacanteSearch = new Vacante();
 		model.addAttribute("vacantes", serviceVacantes.buscarDestacadas());
+		model.addAttribute("categorias", ics.buscarTodas());
+		model.addAttribute("search", vacanteSearch);
 		
 	}
 	
