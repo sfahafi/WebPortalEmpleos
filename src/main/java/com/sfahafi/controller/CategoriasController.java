@@ -3,6 +3,8 @@ package com.sfahafi.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,6 +32,13 @@ public class CategoriasController {
 		List<Categoria> lista = ics.buscarTodas();
     	model.addAttribute("categorias", lista);
 
+		return "categorias/listCategorias";
+	}
+	
+	@GetMapping("/indexPaginate")
+	public String mostrarIndexPaginado2(Model model, Pageable page) {
+		Page<Categoria> lista = ics.buscartodas(page);
+		model.addAttribute("categorias", lista);
 		return "categorias/listCategorias";
 	}
 	

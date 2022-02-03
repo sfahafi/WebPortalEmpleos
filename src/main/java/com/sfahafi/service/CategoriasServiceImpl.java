@@ -3,6 +3,8 @@ package com.sfahafi.service;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.sfahafi.model.Categoria;
@@ -88,6 +90,13 @@ public class CategoriasServiceImpl implements I_CategoriasService {
 	public void eliminar(Integer idCategoria) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	@Override
+	public Page<Categoria> buscartodas(Pageable page) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
