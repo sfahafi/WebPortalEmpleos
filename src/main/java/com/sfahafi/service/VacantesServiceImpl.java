@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
+
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import com.sfahafi.model.Vacante;
 
@@ -107,6 +109,13 @@ public class VacantesServiceImpl implements I_VacantesService {
 	public void eliminar(Integer idVacante) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	@Override
+	public List<Vacante> buscarByExample(Example<Vacante> example) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
