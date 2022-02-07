@@ -35,6 +35,19 @@ public class UsuariosController {
 		return "redirect:/usuarios/index";
 	}
 	
+	@GetMapping("/blockuser/{id}")
+	public String bloquearUsuario(@PathVariable("id") int idUsuario) {
+		Usuario usuario = ius.buscarPorId(idUsuario);
+		usuario.setEstatus(0);
+		ius.guardar(usuario);
+		return "redirect:/usuarios/index";
+	}
 	
-	
+	@GetMapping("/unlockuser/{id}")
+	public String desbloquearUsuario(@PathVariable("id") int idUsuario) {
+		Usuario usuario = ius.buscarPorId(idUsuario);
+		usuario.setEstatus(1);
+		ius.guardar(usuario);
+		return "redirect:/usuarios/index";
+	}
 }
