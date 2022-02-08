@@ -112,8 +112,8 @@ public class HomeController {
 	@GetMapping("/edituser/{id}")
 	public String editarUsuario(@PathVariable("id") int idUsuario, Model model) {
 		Usuario usuario = ius.buscarPorId(idUsuario);
-		model.addAttribute("usuarios", usuario);
-		return "redirect:/signup";
+		model.addAttribute("usuario", usuario);
+		return "formRegistro";
 	}
 	
 	@PostMapping("/signin")
@@ -124,6 +124,8 @@ public class HomeController {
 		}	
 		usuario.setEstatus(1); // Activado por defecto
 		usuario.setFechaRegistro(new Date()); // Fecha de Registro, la fecha actual del servidor
+		String pass = usuario.getPassword();
+		usuario.setPassword("{noop}" + pass);
 		
 		// Creamos el Perfil que le asignaremos al usuario nuevo
 		Perfil perfil = new Perfil();
