@@ -30,17 +30,13 @@
 		<div class="dropdown" sec:authorize="hasAnyAuthority('SUPERVISOR','ADMINISTRADOR')">
 		
 			<button class="btn btn-primary dropdown-toggle" type="button"
-				id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+				id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
 				aria-expanded="false">
 				<i class="fas fa-user"></i>&nbsp;
-				<span th:if="${session.usuario != null}" class="text-light" th:text="${session.usuario.username}">&nbsp;
+				<span th:if="${session.usuario != null}" class="text-light" th:text="${session.usuario.username}">
 			</button>
 			
-		<div class="dropdown-menu dropdown-menu-right animated fadeIn bg-primary" aria-labelledby="dropdownMenu2">
-				
-			<button class="dropdown-item bg-primary " type="button" onclick="changePassword();">
-				 <a class="btn btn-primary" href="#"><i class="fas fa-key"> Cambiar contrase&ntilde;a</i></a>
-			</button>
+		<div class="dropdown-menu dropdown-menu-right animated fadeIn bg-primary" aria-labelledby="dropdownMenu1">
 				
 			<button class="dropdown-item bg-primary" type="button" onclick="signOut();">
 				<a class="btn btn-primary" th:href="@{/logout}"><i class="fas fa-caret-right"> Salir</i></a>
