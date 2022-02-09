@@ -6,13 +6,13 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -43,6 +43,9 @@ public class HomeController {
 	
 	@Autowired
 	private I_CategoriasService ics;
+	
+	//@Autowired
+	//private PasswordEncoder passwordEncoder;
 	
 	
 	@GetMapping("/tabla")
@@ -122,8 +125,16 @@ public class HomeController {
 			System.out.println("Existieron errores");
 			return "categorias/formCategoria";
 		}	
+		
+		//String passPlano = usuario.getPassword();
+		//String passEncriptado = passwordEncoder.encode(passPlano);
+		//usuario.setPassword(passEncriptado);
+		
+		
 		usuario.setEstatus(1); // Activado por defecto
 		usuario.setFechaRegistro(new Date()); // Fecha de Registro, la fecha actual del servidor
+		
+		//Para indicar que la password no esta encriptado utilizamos {noop}+password en la db
 		String pass = usuario.getPassword();
 		usuario.setPassword("{noop}" + pass);
 		
