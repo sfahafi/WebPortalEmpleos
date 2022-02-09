@@ -22,24 +22,37 @@
 				<a class="nav-link" th:href="@{/usuarios/index}">Usuarios</a>
 			</li>
 		</ul>
+		
+		<div sec:authorize="isAnonymous()">
+			<a class="btn btn-primary" th:href="@{/index}">Ingresar</a>
+			<a class="btn btn-primary" th:href="@{/signup}">Registrarse</a>&nbsp;
+		</div>
+		
+		<!--
 		<a class="btn btn-primary" th:href="@{/index}">Ingresar</a>&nbsp; 
 		<a class="btn btn-primary" th:href="@{/signup}">Registrarse</a>&nbsp; 
-		<!--<a class="btn btn-primary" th:href="@{/logout}">Salir</a>&nbsp; -->			
+		<a class="btn btn-primary" th:href="@{/logout}">Salir</a>&nbsp; -->			
 			
 			
 		
 			<button class="btn btn-primary dropdown-toggle" type="button"
-				id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+				id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
 				aria-expanded="false">
+				
 				<i class="fas fa-user"></i>
 				<span th:if="${session.usuario != null}" th:text="${session.usuario.username}" class="text-light">
+				
 			</button>
 			
-		<div class="dropdown-menu dropdown-menu-right animated fadeIn bg-primary" aria-labelledby="dropdownMenu1">
+		<div class="dropdown-menu dropdown-menu-right animated fadeIn bg-primary" aria-labelledby="dropdownMenu2">
 				
-			<button class="dropdown-item bg-primary" type="button" onclick="signOut();">
-				<a class="btn btn-primary" th:href="@{/logout}"><i class="fas fa-caret-right"> Salir</i></a>
-			</button>
+			<a class="dropdown-item bg-primary text-light" type="button" onclick="signOut();" href="#">
+				<i class="fas fa-key"></i> Cambiar contrase&ntilde;a
+			</a>
+				
+			<a class="dropdown-item bg-primary text-light" type="button" onclick="signOut();" th:href="@{/logout}">
+				<i class="fas fa-sign-in-alt"></i> Salir
+			</a>
 				
 		</div>
 		</div>
