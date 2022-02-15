@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sfahafi.model.Perfil;
@@ -46,8 +47,8 @@ public class HomeController {
 	@Autowired
 	private I_CategoriasService ics;
 	
-	//@Autowired
-	//private PasswordEncoder passwordEncoder;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	
 	@GetMapping("/tabla")
@@ -135,24 +136,19 @@ public class HomeController {
 		return "formRegistro";
 	}
 	
-	@PostMapping("/signin")
-	public String guardarRegistro(Usuario usuario, BindingResult result, RedirectAttributes attributes) {
-		if (result.hasErrors()){		
-			System.out.println("Existieron errores");
-			return "categorias/formCategoria";
-		}	
-		
-		//String passPlano = usuario.getPassword();
-		//String passEncriptado = passwordEncoder.encode(passPlano);
-		//usuario.setPassword(passEncriptado);
-		
+	@PostMapping("/signup")
+	public String guardarRegistro(Usuario usuario, RedirectAttributes attributes) {	
 		
 		usuario.setEstatus(1); // Activado por defecto
 		usuario.setFechaRegistro(new Date()); // Fecha de Registro, la fecha actual del servidor
 		
 		//Para indicar que la password no esta encriptado utilizamos {noop}+password en la db
-		String pass = usuario.getPassword();
-		usuario.setPassword("{noop}" + pass);
+		//String pass = usuario.getPassword();
+		//usuario.setPassword("{noop}" + pass);
+		
+		String passPlano = usuario.getPassword();
+		String passEncriptado = passwordEncoder.encode(passPlano);
+		usuario.setPassword(passEncriptado);
 		
 		// Creamos el Perfil que le asignaremos al usuario nuevo
 		Perfil perfil = new Perfil();
@@ -168,6 +164,13 @@ public class HomeController {
 		
 		return "redirect:/usuarios/index";
 	}
+	
+	@GetMapping("/bcrypt/{texto}")
+	@ResponseBody                        // para redenrizar texto y no una vista
+	public String encriptar(@PathVariable("texto") String texto) {
+		return texto + " Encriptado en Bcrypt: " + passwordEncoder.encode(texto);
+	}
+	
 	
 	@GetMapping("/search")
 	public String buscar(@ModelAttribute("search") Vacante vacante, Model model) {

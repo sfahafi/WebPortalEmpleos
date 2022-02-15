@@ -45,6 +45,7 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
 				.antMatchers("/", 
 						"/signup", 
 						"/search", 
+						"/bcrypt/**", 
 						"/vacantes/view/**").permitAll()
 				
 				
@@ -63,10 +64,9 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
 				.and().formLogin().loginPage("/login").permitAll();
 	}
 	
-	/*
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 	return new BCryptPasswordEncoder();
-	}*/
+	}
 
 }
