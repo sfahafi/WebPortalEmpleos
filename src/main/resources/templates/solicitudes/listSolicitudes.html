@@ -27,6 +27,9 @@
         <div class="card">
           <h4 class="card-header"><strong>Listado de Solicitudes de Empleo</strong></h4>              
           <div class="card-body">
+          
+          <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
+          
             <table class="table table-hover">
               <thead class="thead-light">
                 <tr>
@@ -38,16 +41,16 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Finanzas</td>
-                  <td>Contador PÃºblico</td>
-                  <td>Maria GÃ³mez</td>
-                  <td>12-01-2019</td>
+                <tr th:each="solicitud : ${solicitudes}">
+                  <td th:text="${solicitud.vacante.categoria.nombre}"> </td>
+                  <td th:text="${solicitud.vacante.nombre}"> </td>
+                  <td th:text="${solicitud.usuario.nombre}"> </td>
+                  <td th:text="${#dates.format(solicitud.fecha, 'dd-MM-yyyy')}"> </td>
                   <td>
                     <a href="#" class="btn btn-success btn-sm" role="button" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
-                    <a href="#" onclick="return confirm('¿Estas seguro?')" class="btn btn-success btn-sm" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
-                    <a href="#" class="btn btn-success btn-sm" role="button" title="Enviar correo electrÃ³nico al usuario."><i class="fas fa-envelope" aria-hidden="true"></i></a>
-                    <a href="#" class="btn btn-success btn-sm" role="button" title="Descargar Curriculm Vitae."><i class="fas fa-download" aria-hidden="true"></i></a>
+                    <a th:href="@{/solicitudes/delete/{id} (id=${solicitud.id})}" onclick="return confirm('¿Estas seguro?')" class="btn btn-success btn-sm" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
+                    <a href="#" class="btn btn-success btn-sm" role="button" title="Enviar correo electr&oacute;nico al usuario."><i class="fas fa-envelope" aria-hidden="true"></i></a>
+                    <a th:href="@{/cv/{archivo} (archivo=${solicitud.archivo})}" class="btn btn-success btn-sm" role="button" title="Descargar Curriculm Vitae." target="_blank"><i class="fas fa-download" aria-hidden="true"></i></a>
                   </td>
                 </tr>
                                
@@ -66,6 +69,6 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>     
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>     
   </body>
 </html>
