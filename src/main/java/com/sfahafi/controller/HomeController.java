@@ -84,6 +84,11 @@ public class HomeController {
 		
 	}
 	
+	@GetMapping("/about")
+	public String mostrarAcerca() {			
+		return "acerca";
+	}
+	
 	@GetMapping("/login")
 	public String mostrarLogin() {
 		return "formLogin";

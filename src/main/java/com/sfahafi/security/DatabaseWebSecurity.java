@@ -42,15 +42,19 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
 				
 				
 				// Las vistas públicas no requieren autenticación
-				.antMatchers("/", 
+				.antMatchers("/",
+						"/login",
 						"/signup", 
 						"/search", 
-						"/bcrypt/**", 
+						"/bcrypt/**",
+						"/about",
 						"/vacantes/view/**").permitAll()
 				
 				
 				
 				// Asignar permisos a URLs por ROLES
+				.antMatchers("/solicitudes/create/**", "/solicitudes/save/**").hasAuthority("USUARIO")
+				.antMatchers("/solicitudes/**").hasAnyAuthority("SUPERVISOR","ADMINISTRADOR")
 				.antMatchers("/vacantes/**").hasAnyAuthority("SUPERVISOR","ADMINISTRADOR")
 				.antMatchers("/categorias/**").hasAnyAuthority("SUPERVISOR","ADMINISTRADOR")
 				.antMatchers("/usuarios/**").hasAnyAuthority("ADMINISTRADOR")
@@ -61,9 +65,19 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
 				
 				
 				// El formulario de Login no requiere autenticacion
-				.and().formLogin().loginPage("/login").permitAll();
+				.and().formLogin().loginPage("/login").permitAll()
+		        .and().logout().permitAll();
+	
+	
+	
 	}
 	
+	
+	
+	/**
+	 *  Implementación de Spring Security que encripta passwords con el algoritmo Bcrypt
+	 * @return
+	 */
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 	return new BCryptPasswordEncoder();
