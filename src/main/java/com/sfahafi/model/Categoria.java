@@ -3,7 +3,7 @@ package com.sfahafi.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="categorias")
+@Table(name="Categorias")
 public class Categoria {
 
 	@Id

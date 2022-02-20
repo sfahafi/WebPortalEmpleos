@@ -88,7 +88,7 @@ public class VacantesController {
 		}
 
 		serviceVacantes.guardar(vacante);
-		attributes.addFlashAttribute("msg", "Registro Guardado");
+		attributes.addFlashAttribute("msg", "La vacante se registro con éxito!");
 		System.out.println("Vacante: " + vacante);
 
 		return "redirect:/vacantes/index";
@@ -100,26 +100,7 @@ public class VacantesController {
 		webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
 	}
 
-	/*
-	 * @PostMapping("/save") public String guardar(@RequestParam("nombre") String
-	 * nombre, @RequestParam("descripcion") String descripcion,
-	 * 
-	 * @RequestParam("estatus") String estatus, @RequestParam("fecha") String fecha,
-	 * 
-	 * @RequestParam("destacado") int destacado, @RequestParam("salario") Double
-	 * salario,
-	 * 
-	 * @RequestParam("detalles") String detalles){
-	 * 
-	 * System.out.println("Nombre de Vacante: " + nombre);
-	 * System.out.println("Descripcion: " + descripcion);
-	 * System.out.println("Estatus: " + estatus);
-	 * System.out.println("Fecha de Publicacion: " + fecha);
-	 * System.out.println("Destacado: " + destacado); System.out.println("Salario: "
-	 * + salario); System.out.println("Detalles: " + detalles);
-	 * 
-	 * return "vacantes/listVacantes"; }
-	 */
+	
 
 	@GetMapping("/delete/{id}")
 	public String eliminar(@PathVariable("id") int idVacante, RedirectAttributes attributes) {
@@ -128,7 +109,7 @@ public class VacantesController {
 		try {
 
 			serviceVacantes.eliminar(idVacante);
-			attributes.addFlashAttribute("msg", "La vacante fue eliminada"); // para desplegar mensaje en la vista
+			attributes.addFlashAttribute("msg", "La vacante fue eliminada!"); // para desplegar mensaje en la vista
 			// model.addAttribute("id", idVacante);
 			
 		} catch (Exception ex) {

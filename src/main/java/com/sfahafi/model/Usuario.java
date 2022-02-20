@@ -7,7 +7,7 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table(name="usuarios")
+@Table(name="Usuarios")
 public class Usuario {
 	
 	@Id
@@ -21,7 +21,7 @@ public class Usuario {
 	private Date fechaRegistro;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "usuarioperfil",
+	@JoinTable(name = "UsuarioPerfil",
 				joinColumns = @JoinColumn(name = "idUsuario"),
 				inverseJoinColumns = @JoinColumn(name = "idPerfil")
 			   )

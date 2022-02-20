@@ -58,7 +58,7 @@ public class CategoriasController {
 		
 		// Guadamos el objeto categoria en la bd
 		ics.guardar(categoria);
-		attributes.addFlashAttribute("msg", "Los datos de la categorÃ­a fueron guardados!");		
+		attributes.addFlashAttribute("msg", "La categoría se registro con éxito!");		
 		return "redirect:/categorias/index";
 	}
 	
@@ -66,7 +66,7 @@ public class CategoriasController {
 	public String eliminar(@PathVariable("id") int idCategoria, RedirectAttributes attributes) {
 		System.out.println("Borrando la categoria con id: " + idCategoria);
 		ics.eliminar(idCategoria);
-		attributes.addFlashAttribute("msg", "La Categoria fue eliminada!");
+		attributes.addFlashAttribute("msg", "La categoría fue eliminada!");
 		return "redirect:/categorias/index";
 	}
 	
@@ -77,19 +77,6 @@ public class CategoriasController {
 		return "categorias/formCategorias";
 	}
 	
-	/*
-	@ModelAttribute
-	public void setGenericos(Model model) {
-		model.addAttribute("categorias", ics.buscarTodas());
-	}*/
 
-	/*
-	// @PostMapping("/save")
-	@RequestMapping(value="/save", method=RequestMethod.POST)
-	public String guardar(@RequestParam("nombre") String nombre, @RequestParam("descripcion") String descripcion) {
-		System.out.println("Categoria: " + nombre);
-		System.out.println("Descripcion: " + descripcion);
-		return "categorias/listCategorias";
-	} */
 	
 }

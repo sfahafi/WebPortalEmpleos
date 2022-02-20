@@ -5,7 +5,7 @@ import java.util.Date;
 import javax.persistence.*;
 
 @Entity
-@Table(name="vacantes")
+@Table(name="Vacantes")
 public class Vacante {
 	
 	@Id
@@ -19,11 +19,13 @@ public class Vacante {
 	private String imagen = "no-image.png";
 	private String estatus;
 	private String detalles;
+	
+	
 	//@Transient  // Para ignorar el mapeo de este atributo
 	@OneToOne
 	@JoinColumn(name="idCategoria")
 	private Categoria categoria;
-	
+
 	
 	public Integer getId() {
 		return id;
@@ -93,6 +95,7 @@ public class Vacante {
 	public void reset() {
 		this.imagen = null;
 	}
+	
 	
 	@Override
 	public String toString() {

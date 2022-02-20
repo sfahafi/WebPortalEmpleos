@@ -3,7 +3,7 @@ package com.sfahafi.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="perfiles")
+@Table(name="Perfiles")
 public class Perfil {
 	
 	@Id
