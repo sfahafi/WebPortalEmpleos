@@ -57,6 +57,7 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
 				.antMatchers("/solicitudes/**").hasAnyAuthority("SUPERVISOR","ADMINISTRADOR")
 				.antMatchers("/vacantes/**").hasAnyAuthority("SUPERVISOR","ADMINISTRADOR")
 				.antMatchers("/categorias/**").hasAnyAuthority("SUPERVISOR","ADMINISTRADOR")
+				.antMatchers("/api/**").hasAnyAuthority("SUPERVISOR","ADMINISTRADOR")
 				.antMatchers("/usuarios/**").hasAnyAuthority("ADMINISTRADOR")
 				
 				
